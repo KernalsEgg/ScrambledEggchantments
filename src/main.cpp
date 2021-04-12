@@ -233,31 +233,24 @@ void Load(SKSE::SerializationInterface* a_serializationInterface)
 		{
 			SKSE::log::error("Version mismatch."sv);
 
-			break;
+			continue;
 		}
 
-		switch (type)
+		if (type != Serialization::Type::kEnchantment)
 		{
-			case Serialization::Type::kEnchantment:
-				{
-					if (length != sizeof(Serialization::Enchantment))
-					{
-						SKSE::log::error("Length mismatch."sv);
+			SKSE::log::error("Type mismatch."sv);
 
-						break;
-					}
-
-					Serialization::Deserialize(a_serializationInterface);
-
-					break;
-				}
-			default:
-				{
-					SKSE::log::error("Type mismatch."sv);
-
-					break;
-				}
+			continue;
 		}
+
+		if (length != sizeof(Serialization::Enchantment))
+		{
+			SKSE::log::error("Length mismatch."sv);
+
+			continue;
+		}
+
+		Serialization::Deserialize(a_serializationInterface);
 	}
 
 	spinLock.Unlock();
