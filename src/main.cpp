@@ -293,7 +293,7 @@ extern "C" DLLEXPORT bool SKSEAPI SKSEPlugin_Query(const SKSE::QueryInterface* a
 		return false;
 	}
 
-	*path /= "EnchantmentChargeFix.log"sv;
+	*path /= "EnchantmentCostFix.log"sv;
 	auto sink = std::make_shared<spdlog::sinks::basic_file_sink_mt>(path->string(), true);
 	auto logger = std::make_shared<spdlog::logger>("global log"s, std::move(sink));
 
@@ -304,7 +304,7 @@ extern "C" DLLEXPORT bool SKSEAPI SKSEPlugin_Query(const SKSE::QueryInterface* a
 	spdlog::set_pattern("[%H:%M:%S:%e] %g:%# (%^%l%$) %v"s);
 
 	a_pluginInfo->infoVersion = SKSE::PluginInfo::kVersion;
-	a_pluginInfo->name = "EnchantmentChargeFix";
+	a_pluginInfo->name = "EnchantmentCostFix";
 	a_pluginInfo->version = 1;
 
 	if (a_queryInterface->IsEditor())

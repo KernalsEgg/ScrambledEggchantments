@@ -1,7 +1,7 @@
 {
-	"name": "enchantmentchargefix",
+	"name": "enchantmentcostfix",
 	"version-string": "1.0.0",
-	"description": "Fixes the charge of player armor and weapon enchantments not being saved.",
+	"description": "Fixes the cost of player armor and weapon enchantments not being saved.",
 	"dependencies":
 	[
 		"boost-atomic",
