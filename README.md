@@ -9,3 +9,4 @@
 * Clone the CommonLibSSE repo:<br/>`git clone https://github.com/Ryan-rsm-McKenzie/CommonLibSSE`
 * Set the `CommonLibSSEPath` and `Skyrim64Path` environment variables
 * Build the solution of the CommonLibSSE example plugin:<br/>`cmake -B build -S .`
+* Delete the post-build event moving the non-existant PDB from the release build of the plugin
