@@ -8,4 +8,4 @@
 * Copy and replace the files in that repo with the files in this repo
 * Clone the CommonLibSSE repo:<br/>`git clone https://github.com/Ryan-rsm-McKenzie/CommonLibSSE`
 * Set the `CommonLibSSEPath` and `Skyrim64Path` environment variables
-* Build the solution:<br/>`cmake -B build -S .`
+* Build the solution of the CommonLibSSE example plugin:<br/>`cmake -B build -S .`
