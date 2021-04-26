@@ -10,7 +10,7 @@ set(VCPKG_TARGET_TRIPLET "x64-windows-static" CACHE STRING "")
 # ---- Project ----
 
 project(
-	EnchantmentCostFix
+	ScrambledEggchantments
 	VERSION 1.0.0
 	LANGUAGES CXX
 )
@@ -45,41 +45,41 @@ if (MSVC)
 	)
 
 	add_compile_options(
-		/MP	# Build with Multiple Processes
-		/sdl	# Enable Additional Security Checks
-		/utf-8	# Set Source and Executable character sets to UTF-8
-		/Zi	# Debug Information Format
+		/MP						# Build with Multiple Processes
+		/sdl					# Enable Additional Security Checks
+		/utf-8					# Set Source and Executable character sets to UTF-8
+		/Zi						# Debug Information Format
 
-		/permissive-	# Standards conformance
+		/permissive-			# Standards conformance
 
-		/Zc:alignedNew	# C++17 over-aligned allocation
-		/Zc:auto	# Deduce Variable Type
+		/Zc:alignedNew			# C++17 over-aligned allocation
+		/Zc:auto				# Deduce Variable Type
 		/Zc:char8_t
-		/Zc:__cplusplus	# Enable updated __cplusplus macro
+		/Zc:__cplusplus			# Enable updated __cplusplus macro
 		/Zc:externC
-		/Zc:externConstexpr	# Enable extern constexpr variables
-		/Zc:forScope	# Force Conformance in for Loop Scope
+		/Zc:externConstexpr		# Enable extern constexpr variables
+		/Zc:forScope			# Force Conformance in for Loop Scope
 		/Zc:hiddenFriend
 		/Zc:implicitNoexcept	# Implicit Exception Specifiers
 		/Zc:lambda
-		/Zc:noexceptTypes	# C++17 noexcept rules
-		/Zc:preprocessor	# Enable preprocessor conformance mode
+		/Zc:noexceptTypes		# C++17 noexcept rules
+		/Zc:preprocessor		# Enable preprocessor conformance mode
 		/Zc:referenceBinding	# Enforce reference binding rules
-		/Zc:rvalueCast	# Enforce type conversion rules
-		/Zc:sizedDealloc	# Enable Global Sized Deallocation Functions
-		/Zc:strictStrings	# Disable string literal type conversion
-		/Zc:ternary	# Enforce conditional operator rules
-		/Zc:threadSafeInit	# Thread-safe Local Static Initialization
+		/Zc:rvalueCast			# Enforce type conversion rules
+		/Zc:sizedDealloc		# Enable Global Sized Deallocation Functions
+		/Zc:strictStrings		# Disable string literal type conversion
+		/Zc:ternary				# Enforce conditional operator rules
+		/Zc:threadSafeInit		# Thread-safe Local Static Initialization
 		/Zc:tlsGuards
-		/Zc:trigraphs	# Trigraphs Substitution
-		/Zc:wchar_t	# wchar_t Is Native Type
+		/Zc:trigraphs			# Trigraphs Substitution
+		/Zc:wchar_t				# wchar_t Is Native Type
 
 		/experimental:external
 		/external:anglebrackets
 		/external:W0
 
-		/W4	# Warning level (all warnings)
-		/WX	# Warning level (warnings are errors)
+		/W4						# Warning level (all warnings)
+		/WX						# Warning level (warnings are errors)
 
 		"$<$<CONFIG:DEBUG>:>"
 		"$<$<CONFIG:RELEASE>:/Zc:inline;/JMC->"
@@ -88,18 +88,13 @@ endif()
 
 add_subdirectory("$ENV{CommonLibSSEPath}" CommonLibSSE)
 
+find_package(nlohmann_json REQUIRED)
 find_package(spdlog REQUIRED CONFIG)
 
 # ---- Add source files ----
 
-set(headers
-	src/PCH.h
-)
-
-set(sources
-	src/main.cpp
-	src/PCH.cpp
-)
+include(cmake/headerlist.cmake)
+include(cmake/sourcelist.cmake)
 
 source_group(
 	TREE
@@ -118,6 +113,7 @@ add_library(
 	${sources}
 	${CMAKE_CURRENT_BINARY_DIR}/version.rc
 	.clang-format
+	ScrambledEggchantments.json
 )
 
 target_compile_features(
@@ -136,6 +132,7 @@ target_link_libraries(
 	${PROJECT_NAME}
 	PRIVATE
 		CommonLibSSE::CommonLibSSE
+		nlohmann_json::nlohmann_json
 		spdlog::spdlog
 )
 
@@ -161,4 +158,5 @@ add_custom_command(
 	POST_BUILD
 	COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:${PROJECT_NAME}> $ENV{Skyrim64Path}/Data/SKSE/Plugins/
 	COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_PDB_FILE:${PROJECT_NAME}> $ENV{Skyrim64Path}/Data/SKSE/Plugins/
+	COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/ScrambledEggchantments.json $ENV{Skyrim64Path}/Data/SKSE/Plugins/
 )

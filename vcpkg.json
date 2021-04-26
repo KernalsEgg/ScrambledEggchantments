@@ -1,11 +1,12 @@
 {
-	"name": "enchantmentcostfix",
+	"name": "scrambledeggchantments",
 	"version-string": "1.0.0",
-	"description": "Fixes the cost of player armor and weapon enchantments not being saved.",
+	"description": "A collection of enchantment bug fixes and patches.",
 	"dependencies":
 	[
 		"boost-atomic",
 		"boost-stl-interfaces",
+		"nlohmann-json",
 		"span-lite",
 		"spdlog"
 	]
