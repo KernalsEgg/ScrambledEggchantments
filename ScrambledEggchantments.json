@@ -1,0 +1,11 @@
+{
+	"fixes":
+	{
+		"enchantmentCost": true				/* The overridden cost of player created enchantments is saved. */
+	},
+	"patches":
+	{
+		"enchantmentValue": false,			/* The value of an enchantment is calculated using the default cost of the enchantment. */
+		"multipleEnchantmentEffects": true	/* Each of an enchantments effects are improved by skill in enchanting. */
+	}
+}
